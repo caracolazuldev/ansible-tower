@@ -1,0 +1,9 @@
+
+services:
+
+  tower:
+    image: caracolazul/ansible-tower:latest
+    build:
+      context: .
+      dockerfile: Containerfile
+
