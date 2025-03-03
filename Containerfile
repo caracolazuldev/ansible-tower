@@ -7,7 +7,8 @@ RUN apk update && apk add --no-cache \
     bash \
     tini \
     python3 \
-    py3-pip
+    py3-pip \
+    openssh-client
 
 RUN apk add --no-cache \
     ansible \
@@ -16,6 +17,10 @@ RUN apk add --no-cache \
 # create the user, ansible
 RUN adduser -D ansible
 RUN mkdir /home/ansible/.ssh && chown ansible:ansible /home/ansible/.ssh
+
+# customize ssh configs:
+COPY ./ssh_config /etc/ssh/ssh_config.d/custom_ssh.conf
+RUN chmod 644 /etc/ssh/ssh_config.d/*
 
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

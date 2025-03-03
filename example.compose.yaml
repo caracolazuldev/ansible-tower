@@ -1,0 +1,13 @@
+services:
+
+  ansible:
+    image: caracolazul/ansible-tower
+    environment:
+       - ANSIBLE_INVENTORY=/app/inventory/hosts
+    volumes:
+      - .:/app
+      - ./inventory/ssh_config:/home/ansible/.ssh/config
+      - ~/.ssh/known_hosts:/home/ansible/.ssh/known_hosts
+      - ~/.ssh/id_rsa_2020:/home/ansible/.ssh/id_rsa_2020
+ 
+#  TIP: check the permissions of the .ssh/config file, group and world must not have write.
