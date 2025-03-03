@@ -13,11 +13,14 @@ RUN apk add --no-cache \
     ansible \
     ansible-lint
 
+# create the user, ansible
+RUN adduser -D ansible
+RUN mkdir /home/ansible/.ssh && chown ansible:ansible /home/ansible/.ssh
+
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["tini","/entrypoint.sh"]
 # Set the working directory
 WORKDIR /app
-
-
+USER ansible
