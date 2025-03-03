@@ -65,7 +65,7 @@ else
             exec ansible-vault "$@"
             ;;
         *)
-			shift
+			# shift
             # Default to the 'ansible' command
             exec ansible "$@"
             ;;
